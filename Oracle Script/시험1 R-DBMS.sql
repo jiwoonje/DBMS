@@ -25,6 +25,15 @@ insert into DEPARTMENT (dno, dname, loc)
 insert into DEPARTMENT (dno, dname, loc)
     values (40, 'OPERATIONS', 'BOSTON');
 
+insert into DEPARTMENT
+    values (10, 'ACCOUNTING', 'NEW YORK');
+insert into DEPARTMENT
+    values (20, 'RESEARCH', 'DALLAS');
+insert into DEPARTMENT
+    values (30, 'SALES', 'CHICAGO');
+insert into DEPARTMENT
+    values (40, 'OPERATIONS', 'BOSTON');
+    
 select * from department;
 commit;
 
@@ -65,6 +74,37 @@ insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
 update employee
 set eno = 7782
 where eno = 7785;
+
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7369, 'SMITH','CLERK', 7902, '80/12/17', 800, 20);
+insert into EMPLOYEE
+    values (7499, 'ALLEN','SALESMAN', 7698, '81/02/20', 1600, 300, 30);
+insert into EMPLOYEE
+    values (7521, 'WARD','SALESMAN', 7698, '81/02/22', 1250, 500, 30);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7566, 'JONES','MANAGER', 7839, '81/04/02', 2975, 20);
+insert into EMPLOYEE
+    values (7654, 'MARTIN','SALESMAN', 7698, '81/09/28', 1250, 1400, 30);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7698, 'BLAKE','MANAGER', 7839, '81/05/01', 2850, 30);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7782, 'CLARK','MANAGER', 7839, '81/06/09', 2450, 10);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7788, 'SCOTT','ANALYST', 7566, '87/07/13', 3000, 20);
+insert into EMPLOYEE (eno, ename, job, hiredate, salary, dno)
+    values (7839, 'KING','PRESIDENT', '81/11/17', 5000, 10);
+insert into EMPLOYEE
+    values (7844, 'TURNER','SALESMAN', 7698, '81/09/08', 1500, 0, 30);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7876, 'ADAMS','CLERK', 7788, '87/07/13', 1100, 20);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7900, 'JAMES','CLERK', 7698, '81/12/03', 950, 30);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7902, 'FORD','ANALYST', 7566, '81/12/03', 3000, 20);
+insert into EMPLOYEE (eno, ename, job, manager, hiredate, salary, dno)
+    values (7934, 'MILLER','CLERK', 7782, '82/01/23', 1300, 10);
+
+
 select * from employee;
 
 commit;
@@ -83,7 +123,7 @@ where hiredate like '81%';
     -- 급여가 $1600, $950, 또는 $1300 이 아닌 사원의 이름, 담당업무, 급여를 출력하시오.
 select ename 이름, job 담당업무, salary 급여
 from employee
-where (job = 'CLERK' or job = 'SALESMAN') and (salary != 1600 and salary != 950 and salary != 1300);
+where job in ('CLERK', 'SALESMAN') and salary not in (1600, 950, 1300);
 
 -- 4. 자신이 태어난 날짜에서 현재까지 몇 개월이 지났는지 출력 하세요. 소숫점은 잘라서 출력 하세요 . (months_between , trunc 함수 사용)
 select trunc(months_between(sysdate,to_date('1992/02/11', 'YYYY-MM-DD')))
@@ -94,7 +134,7 @@ from dual;
 select dno 부서번호, round(avg(salary),2) 월급평균
 from employee
 group by dno
-having avg(salary) >= 2000
+having round(avg(salary),2) >= 2000
 order by dno asc;
     
 -- 6. 급여가 평균 급여보다 많은 사원들의 사원번호(eno)와 이름(ename)을 표시하되 결과를 급여(salary) 에 대해 오름차순 정렬하시오.
@@ -201,6 +241,6 @@ select * from dept50;
 delete EMP50
 where job = 'MANAGER';
 
-select * from emp50;
+select * from employee;
 
 commit;
