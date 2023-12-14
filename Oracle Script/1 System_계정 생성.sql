@@ -27,4 +27,4 @@ alter user C##HR10 quota unlimited on USERS;
 drop user C##HR2
 
 -- System 계정에서 hR 계정에게 create view 권한을 부여함
-grant create view to C##HR;
+grant create view to C##HR10;

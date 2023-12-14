@@ -152,7 +152,8 @@
         trunc(98.7654, -1) T3,
         trunc(98.7654, -2) T4
     from dual;
-        
+         select trunc(98.7654)
+         from dual;
     -- MOD : 나머지만 출력
         -- 몫만 출력할 때는 나누기 한 후 trunc 사용
     select MOD(5,2) 나머지, TRUNC(31/2) 몫
