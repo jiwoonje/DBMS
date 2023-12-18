@@ -62,3 +62,6 @@ INSERT INTO SALGRADE VALUES (5,3001,9999);
 
 COMMIT;
 
+select * from DEPARTMENT;
+select * from EMPLOYEE;
+select * from SALGRADE;
